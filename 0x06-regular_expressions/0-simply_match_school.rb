@@ -1,2 +1,3 @@
 #!/usr/bin/env ruby
-#puts ARGV[0].scan(/School/).join
+#regular expression to match the word shool
+puts ARGV[0].scan(/School/).join
