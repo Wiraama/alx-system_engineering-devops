@@ -1,3 +1,4 @@
+#!/usr/bin/pup
 # installing flast from pip3
 
 package { 'python3-pip':
