@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# install nginx
+
+# updating package
+apt-get -y update
+apt-get -y install nginx
+
+# ensuring nginx is running
+service nginx start
+
+#configuring to server
+echo "Hello World!" > /var/www/html/index.html
+
+service nginx restart
+
+# confirm Nginx is running by using curl
