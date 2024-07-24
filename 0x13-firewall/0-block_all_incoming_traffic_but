@@ -1,9 +1,27 @@
-udo apt-get update
-sudo apt-get install ufw
+#!/bin/bash
+
+# Update package list and install ufw
+sudo apt-get update
+sudo apt-get install -y ufw
+
+# Allow SSH (port 22)
 sudo ufw allow 22/tcp
+
+# Allow HTTP (port 80)
 sudo ufw allow 80/tcp
+
+# Allow HTTPS (port 443)
 sudo ufw allow 443/tcp
+
+# Deny all other incoming connections by default
 sudo ufw default deny incoming
+
+# Allow all outgoing connections by default
 sudo ufw default allow outgoing
+
+# Enable ufw
 sudo ufw enable
+
+# Display ufw status to verify rules
 sudo ufw status verbose
+
