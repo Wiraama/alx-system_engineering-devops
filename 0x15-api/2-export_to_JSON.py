@@ -1,39 +1,30 @@
 #!/usr/bin/python3
-"""Exports to-do list information for a given employee ID to JSON format."""
-import json
-import requests
-import sys
+"""
+place holder
+"""
+
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: {} <user_id>".format(sys.argv[0]))
-        sys.exit(1)
 
-        user_id = sys.argv[1]
-        url = "https://jsonplaceholder.typicode.com/"
+    import requests
+    from sys import argv
+    import json
 
-            try:
-                user = requests.get(url + "users/{}".format(user_id)).json()
-                username = user.get("username")
-                todos = requests.get(i
-                        url + "todos",
-                        params={"userId": user_id}
-                        ).json()
-
-                with open("{}.json".format(user_id), "w") as jsonfile:
-                    json.dump(
-                            {user_id: [
-                                {
-                                    "task": t.get("title"),
-                                    "completed": t.get("completed"),
-                                    "username": username
-                                    } for t in todos
-                                ]},
-                            jsonfile,
-                            indent=4  # Pretty-print the JSON data
-                            )
-
-            except requests.exceptions.RequestException as e:
-                print("Error fetching data:", e)
-            except Exception as e:
-                print("An error occurred:", e)
+    if len(argv) < 2:
+        exit()
+    todos = requests.get(
+        "https://jsonplaceholder.typicode.com/todos?userId={}"
+        .format(argv[1]))
+    name = requests.get(
+        "https://jsonplaceholder.typicode.com/users?id={}".format(argv[1]))
+    name = name.json()
+    name = name[0]["username"]
+    todos = todos.json()
+    result = {}
+    result[argv[1]] = []
+    for todo in todos:
+        result[argv[1]].append(
+            {"task": todo["title"], "completed": todo["completed"],
+             "username": name})
+    with open("{}.json".format(argv[1]), 'w') as result_file:
+        json.dump(result, result_file)
